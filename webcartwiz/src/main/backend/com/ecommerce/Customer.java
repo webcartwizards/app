@@ -15,3 +15,4 @@ public class Customer{
         this.name = name;
         this.password = password;
     }
+}
