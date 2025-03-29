@@ -87,7 +87,7 @@ public class LoginController {
         saveAccounts();
     }
 
-    // Register a normal account.
+    // Register a normal account
     private void registerUser(String username, String password) {
         if (accounts.containsKey(username)) {
             throw new IllegalArgumentException("Username already exists.");
@@ -97,7 +97,7 @@ public class LoginController {
         saveAccounts();
     }
 
-    // Loads accounts from ACCOUNTS_FILE.
+    // Loads accounts from accounts.txt
     private void loadAccounts() {
         accounts.clear();
         File file = new File(ACCOUNTS_FILE);
@@ -125,7 +125,7 @@ public class LoginController {
         }
     }
 
-    // Saves accounts to ACCOUNTS_FILE.
+    // Saves accounts to accounts.txt
     private void saveAccounts() {
         File file = new File(ACCOUNTS_FILE);
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
