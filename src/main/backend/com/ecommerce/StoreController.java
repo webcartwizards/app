@@ -81,7 +81,7 @@ public class StoreController implements Initializable {
             // Add the components to the product card.
             productCard.getChildren().addAll(imageView, nameLabel, priceLabel, addButton);
 
-            // Add the product card to the TilePane.
+            // Add the product card to the TilePane
             productContainer.getChildren().add(productCard);
         }
     }
