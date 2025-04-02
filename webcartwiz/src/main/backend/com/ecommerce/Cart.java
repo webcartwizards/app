@@ -9,5 +9,13 @@ public class Cart {
     }
     public void addToCart(Product prod, int quant){
         items.add(new CartItem(prod, quant));
+
+    }
+    public boolean removeFromCart(Product prod, int num){
+        if(num > 0){
+            System.out.println("You cannot remove nothing from the cart");
+            return false;
+        }
+        else return true;
     }
 }
