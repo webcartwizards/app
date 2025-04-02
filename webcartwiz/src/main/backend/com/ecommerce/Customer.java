@@ -15,11 +15,11 @@ public class Customer{
         this.name = name;
         this.password = password;
     }
-    public void addToCart(Cart cart, Product prod, int quantity){
-        cart.addToCart(prod,quantity);
+    public void addToCart(Cart cart, CartItem item, int quantity){
+        cart.addToCart(item.prod,quantity);
     }
-    public Product removeFromCart(Cart cart, Product prod, int quantity){
-        cart.removeFromCart(prod,quantity);
-        return prod;
+    public Product removeFromCart(Cart cart, CartItem item, int quantity){
+        cart.removeFromCart(item,quantity);
+        return item.prod;
     }
 }

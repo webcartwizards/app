@@ -4,18 +4,23 @@ import java.util.*;
 
 public class Cart {
     private List<CartItem> items;
-    public Cart(){
+
+    public Cart() {
         items = new ArrayList<>();
     }
-    public void addToCart(Product prod, int quant){
+
+    public void addToCart(Product prod, int quant) {
         items.add(new CartItem(prod, quant));
 
     }
-    public boolean removeFromCart(Product prod, int num){
-        if(num > 0){
-            System.out.println("You cannot remove nothing from the cart");
+
+    public boolean removeFromCart(CartItem item, int num) {
+        if (num > item.quantity) {
+            System.out.println("You cannot remove more than the quantity");
             return false;
+        } else {
+            item.quantity = item.quantity - num;
+            return true;
         }
-        else return true;
     }
 }
