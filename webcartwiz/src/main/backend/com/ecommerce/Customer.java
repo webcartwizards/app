@@ -1,7 +1,7 @@
 package com.ecommerce;
 
 public class Customer{
-    private final String name;
+    public final String name;
     private String password;
     public Customer() {
         this.name = "User";
