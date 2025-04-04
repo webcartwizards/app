@@ -33,7 +33,7 @@ public class AccountController implements Initializable {
             return;
         }
 
-        // Display a welcome message with the customer's name.
+        // Display a welcome message with the customer's name
         displayWelcomeMessage();
 
         // Load orders based on the role (admin sees all orders, others see their own orders).
