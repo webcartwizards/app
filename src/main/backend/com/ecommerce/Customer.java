@@ -2,9 +2,7 @@ package com.ecommerce;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
-Constructor for the customer class
-*/
+
 public class Customer {
     private final String name;
     private final String accountId;
@@ -12,9 +10,7 @@ public class Customer {
     private boolean admin;   // true if this is the admin account
     private List<Order> orders;
 
-    /** 
-    Constructor for normal accounts.
-    */
+    // Constructor for normal accounts.
     public Customer(String name, String password, String accountId) {
         this.name = name;
         this.password = password;
@@ -23,9 +19,7 @@ public class Customer {
         this.orders = new ArrayList<>();
     }
 
-    /** 
-    Constructor that allows creation of an admin account.
-    */
+    // Constructor that allows creation of an admin account.
     public Customer(String name, String password, String accountId, boolean admin) {
         this.name = name;
         this.password = password;
