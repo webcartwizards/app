@@ -3,14 +3,15 @@ import java.io.*;
 import java.util.*;
 
 public class Cart {
-    private List<CartItem> items;
+    private List<CartItem> CartList;
 
     public Cart() {
-        items = new ArrayList<>();
+        CartList = new ArrayList<>();
     }
 
     public void addToCart(Product prod, int quant) {
-        items.add(new CartItem(prod, quant));
+        CartItem item = new CartItem(prod, quant);
+        CartList.add(item);
 
     }
 
@@ -19,6 +20,12 @@ public class Cart {
             System.out.println("You cannot remove more than the quantity");
             return false;
         } else {
+            for(int i = 0; i < CartList.size(); i++){
+                if(CartList.get(i) == item && num > 0){
+                    CartList.remove(i);
+                    num--;
+                }
+            }
             item.quantity = item.quantity - num;
             return true;
         }
