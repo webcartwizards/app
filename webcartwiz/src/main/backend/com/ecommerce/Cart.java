@@ -6,7 +6,7 @@ public class Cart {
     private List<CartItem> CartList;
 
     public Cart() {
-        CartList = new ArrayList<>();
+        ArrayList<CartItem> CartList = new ArrayList<CartItem>();
     }
 
     public void addToCart(Product prod, int quant) {
