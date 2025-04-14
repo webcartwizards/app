@@ -16,7 +16,7 @@ public class Transcation {
     }
 
     public String getCustomer(){
-        return customer.name;
+        return customer.firstName;
     }
     public String getProd(){
         return product.name;
@@ -30,7 +30,7 @@ public class Transcation {
 
     public String toString(){
         return "Transaction:" +
-                "{ Customer:" + customer.name +
+                "{ Customer:" + customer.firstName +
                 " Product: " + product.name +
                 " Amount: " + amount +
                 " Status: " + status + " }";

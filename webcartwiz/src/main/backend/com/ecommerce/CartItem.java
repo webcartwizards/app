@@ -1,5 +1,6 @@
 package com.ecommerce;
 
+
 public class CartItem {
     Product prod;
     int quantity;
