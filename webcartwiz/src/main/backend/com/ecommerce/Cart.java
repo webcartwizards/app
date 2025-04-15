@@ -41,6 +41,9 @@ public class Cart {
         }
         return false;
     }
+    public void clearCart(){
+        CartList.clear();
+    }
     public double getTotal(){
         double total = 0.0;
         for (Map.Entry<CartItem, Integer> entry : CartList.entrySet()) {
