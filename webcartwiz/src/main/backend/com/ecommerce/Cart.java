@@ -28,7 +28,7 @@ public class Cart {
         }
     }
 
-    public void removeFromCart(CartItem item) {
+    public boolean removeFromCart(CartItem item) {
         if(CartList.containsKey(item)){
             int quantity = CartList.get(item) -1;
             if(quantity > 0){
@@ -37,7 +37,9 @@ public class Cart {
             else{
                 CartList.remove(item);
             }
+            return true;
         }
+        return false;
     }
     public double getTotal(){
         double total = 0.0;
