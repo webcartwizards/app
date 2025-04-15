@@ -5,43 +5,35 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="54.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/sweatpants.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="414.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/jeans.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="224.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/khaki.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="278.1" layoutY="170.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="102.0" layoutY="172.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="467.0" layoutY="173.0" mnemonicParsing="false" text="Add" />
-      <ImageView fitHeight="131.0" fitWidth="128.0" layoutX="57.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/blackshirt.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="140.0" fitWidth="139.0" layoutX="417.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/blueshirt.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="223.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@380%20Project%20Images/whiteshirt.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="103.0" layoutY="347.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="280.0" layoutY="347.0" mnemonicParsing="false" text="Add" />
-      <Button layoutX="469.0" layoutY="347.0" mnemonicParsing="false" text="Add" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="54.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../380 Project Images/sweatpants.png"/>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="414.0" layoutY="22.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../380 Project Images/jeans.png"/>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="224.0" layoutY="24.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../380 Project Images/khaki.png"/>
+   </ImageView>
+   <Button layoutX="278.1" layoutY="170.0" mnemonicParsing="false" text="Add"/>
+   <Button layoutX="102.0" layoutY="172.0" mnemonicParsing="false" text="Add"/>
+   <Button layoutX="467.0" layoutY="173.0" mnemonicParsing="false" text="Add"/>
+   <ImageView fitHeight="131.0" fitWidth="128.0" layoutX="57.0" layoutY="217.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../380 Project Images/blackshirt.png"/>
+   </ImageView>
+   <ImageView fitHeight="140.0" fitWidth="139.0" layoutX="417.0" layoutY="201.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../380 Project Images/blueshirt.png"/>
+   </ImageView>
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="223.0" layoutY="197.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../380 Project Images/whiteshirt.png"/>
+   </ImageView>
+   <Button layoutX="103.0" layoutY="347.0" mnemonicParsing="false" text="Add"/>
+   <Button layoutX="280.0" layoutY="347.0" mnemonicParsing="false" text="Add"/>
+   <Button layoutX="469.0" layoutY="347.0" mnemonicParsing="false" text="Add"/>
 </AnchorPane>
