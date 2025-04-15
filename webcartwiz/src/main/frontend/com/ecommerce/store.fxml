@@ -22,7 +22,7 @@
             <Image url="@380%20Project%20Images/khaki.png" />
          </image>
       </ImageView>
-      <Button layoutX="278.0" layoutY="170.0" mnemonicParsing="false" text="Add" />
+      <Button layoutX="278.1" layoutY="170.0" mnemonicParsing="false" text="Add" />
       <Button layoutX="102.0" layoutY="172.0" mnemonicParsing="false" text="Add" />
       <Button layoutX="467.0" layoutY="173.0" mnemonicParsing="false" text="Add" />
       <ImageView fitHeight="131.0" fitWidth="128.0" layoutX="57.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
