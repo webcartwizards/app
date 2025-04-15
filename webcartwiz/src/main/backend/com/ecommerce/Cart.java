@@ -30,7 +30,7 @@ public class Cart {
 
     public void removeFromCart(CartItem item) {
         if(CartList.containsKey(item)){
-            int quantity = item.quantity--;
+            int quantity = CartList.get(item) -1;
             if(quantity > 0){
                 CartList.put(item, quantity);
             }
@@ -38,5 +38,14 @@ public class Cart {
                 CartList.remove(item);
             }
         }
+    }
+    public double getTotal(){
+        double total = 0.0;
+        for (Map.Entry<CartItem, Integer> entry : CartList.entrySet()) {
+            CartItem item = entry.getKey();
+            int quantity = entry.getValue();
+            total += item.getPrice() * quantity;
+        }
+        return total;
     }
 }
