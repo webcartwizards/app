@@ -1,33 +1,42 @@
 package com.ecommerce;
 import java.io.*;
 import java.util.*;
+import java.util.HashMap;
 
 public class Cart {
-    private List<CartItem> CartList;
+    private Customer customer;
+    private Map<CartItem, Integer> CartList = new HashMap<>();
 
-    public Cart() {
-        ArrayList<CartItem> CartList = new ArrayList<CartItem>();
+    public Cart(){
+        this.CartList = new HashMap<>();
+    }
+    public Customer getCustomer(){
+        return customer;
+    }
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+    public Map<CartItem, Integer> getCartList(){
+        return CartList;
+    }
+    public void addToCart(CartItem item) {
+        if(CartList.containsKey(item)){
+            CartList.put(item,CartList.get(item) + 1);
+        }
+        else{
+            CartList.put(item,1);
+        }
     }
 
-    public void addToCart(Product prod, int quant) {
-        CartItem item = new CartItem(prod, quant);
-        CartList.add(item);
-
-    }
-
-    public boolean removeFromCart(CartItem item, int num) {
-        if (num > item.quantity) {
-            System.out.println("You cannot remove more than the quantity");
-            return false;
-        } else {
-            item.quantity = item.quantity - num;
-            for(int i = 0; i < CartList.size(); i++){
-                if(CartList.get(i) == item && num > 0){
-                    CartList.remove(i);
-                    num--;
-                }
+    public void removeFromCart(CartItem item) {
+        if(CartList.containsKey(item)){
+            int quantity = item.quantity--;
+            if(quantity > 0){
+                CartList.put(item, quantity);
             }
-            return true;
+            else{
+                CartList.remove(item);
+            }
         }
     }
 }

@@ -40,11 +40,11 @@ public class Customer{
     public String getPassword(){
         return password;
     }
-    public void addToCart(Cart cart, CartItem item, int quantity){
-        cart.addToCart(item.prod,quantity);
+    public void addToCart(Cart cart, CartItem item){
+        cart.addToCart(item);
     }
-    public Product removeFromCart(Cart cart, CartItem item, int quantity){
-        cart.removeFromCart(item,quantity);
+    public Product removeFromCart(Cart cart, CartItem item){
+        cart.removeFromCart(item);
         return item.prod;
     }
 }
