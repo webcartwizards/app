@@ -1,11 +1,9 @@
 package com.ecommerce;
 
-
 public class CartItem {
     Product prod;
     int quantity;
     boolean inCart;
-    double price;
 
     public CartItem(Product prod, int i) {
         this.prod = prod;
@@ -15,12 +13,6 @@ public class CartItem {
         } else {
             inCart = false;
         }
-    }
-    public void setPrice(int x){
-        price = x;
-    }
-    public double getPrice(){
-        return price;
     }
 
     public Product getProd() {
