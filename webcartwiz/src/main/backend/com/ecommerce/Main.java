@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -13,7 +14,9 @@ public class Main extends Application {
         BorderPane root = loader.load();
 
         Scene scene = new Scene(root, 800, 600);
+        Image icon = new Image("/380 Project Images/Wizard_Hat.png");
         stage.setTitle("E-Commerce Store");
+        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
     }

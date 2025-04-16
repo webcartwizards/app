@@ -1,33 +1,56 @@
 package com.ecommerce;
 import java.io.*;
 import java.util.*;
+import java.util.HashMap;
 
 public class Cart {
-    private List<CartItem> CartList;
+    private Customer customer;
+    private Map<CartItem, Integer> CartList = new HashMap<>();
 
-    public Cart() {
-        CartList = new ArrayList<>();
+    public Cart(){
+        this.CartList = new HashMap<>();
+    }
+    public Customer getCustomer(){
+        return customer;
+    }
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+    public Map<CartItem, Integer> getCartList(){
+        return CartList;
+    }
+    public void addToCart(CartItem item) {
+        if(CartList.containsKey(item)){
+            CartList.put(item,CartList.get(item) + 1);
+        }
+        else{
+            CartList.put(item,1);
+        }
     }
 
-    public void addToCart(Product prod, int quant) {
-        CartItem item = new CartItem(prod, quant);
-        CartList.add(item);
-
-    }
-
-    public boolean removeFromCart(CartItem item, int num) {
-        if (num > item.quantity) {
-            System.out.println("You cannot remove more than the quantity");
-            return false;
-        } else {
-            item.quantity = item.quantity - num;
-            for(int i = 0; i < CartList.size(); i++){
-                if(CartList.get(i) == item && num > 0){
-                    CartList.remove(i);
-                    num--;
-                }
+    public boolean removeFromCart(CartItem item) {
+        if(CartList.containsKey(item)){
+            int quantity = CartList.get(item) -1;
+            if(quantity > 0){
+                CartList.put(item, quantity);
+            }
+            else{
+                CartList.remove(item);
             }
             return true;
         }
+        return false;
+    }
+    public void clearCart(){
+        CartList.clear();
+    }
+    public double getTotal(){
+        double total = 0.0;
+        for (Map.Entry<CartItem, Integer> entry : CartList.entrySet()) {
+            CartItem item = entry.getKey();
+            int quantity = entry.getValue();
+            total += item.getPrice() * quantity;
+        }
+        return total;
     }
 }
