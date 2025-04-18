@@ -3,7 +3,6 @@ package com.ecommerce;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 
@@ -25,7 +24,7 @@ public class RootController {
     // Called when user selects "Go to Shop"
     @FXML
     private void goToShop() {
-        loadPage("store.fxml"); // or rename store.fxml to shop.fxml if you want
+        loadPage("store.fxml");
     }
 
     // Called when user selects "View Cart"
@@ -46,13 +45,4 @@ public class RootController {
         loadPage("account.fxml");
     }
 
-    // If your "Congrats!" button is in account.fxml
-    @FXML
-    private void showCongrats() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Account");
-        alert.setHeaderText(null);
-        alert.setContentText("Congrats!");
-        alert.showAndWait();
-    }
 }
