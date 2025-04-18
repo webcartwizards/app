@@ -25,7 +25,7 @@
         </MenuBar>
     </top>
 
-    <!-- Center is initially empty or has a welcome message. -->
+    // Center initially has a welcome message
     <center>
         <VBox spacing="10" alignment="CENTER">
             <Text text="Welcome to the Store!" style="-fx-font-size: 24px;"/>
