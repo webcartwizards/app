@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ecommerce.StoreController"
             fx:id="rootPane">
-
     <center>
-        <VBox spacing="10" alignment="CENTER">
-            <Text text="Welcome to the Store!" style="-fx-font-size: 24px;"/>
-            <Text text="Browse and add items to your cart." style="-fx-font-size: 16px;"/>
-        </VBox>
+        <ScrollPane fitToWidth="true">
+            <TilePane fx:id="productContainer" alignment="TOP_CENTER" hgap="20" vgap="20" prefColumns="3">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+            </TilePane>
+        </ScrollPane>
     </center>
 </BorderPane>
