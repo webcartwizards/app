@@ -24,14 +24,14 @@ public class StoreController implements Initializable {
     // A Cart instance to store added products.
     private Cart cart;
 
+    // List of products for sorting
+    private List<Product> products;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize your cart
-        Cart cart = Cart.getInstance();
-
-
-        // product list
-        List<Product> products = Arrays.asList(
+        // Initialize the cart and product list
+        cart = Cart.getInstance();
+        products = Arrays.asList(
                 new Product("Adidas Pants", 10.0),
                 new Product("Black T Shirt", 20.0),
                 new Product("Oakley Sunglasses", 60.0),
@@ -46,31 +46,31 @@ public class StoreController implements Initializable {
                 new Product("Product 12", 30.0)
         );
 
+        // Show the products initially
+        showProducts();
+    }
+
+    // Method to display the products in the TilePane
+    private void showProducts() {
+        productContainer.getChildren().clear();  // Clear existing items
+
         for (Product p : products) {
-            // Create a product card as a VBox.
-            VBox productCard = new VBox(5);  // 5px spacing between elements
+            VBox productCard = new VBox(5);
             productCard.setAlignment(Pos.CENTER);
             productCard.setStyle("-fx-border-color: #ccc; -fx-padding: 10; -fx-background-color: #fff;");
-            productCard.setPrefSize(220, 220);  // fixed size for uniformity
+            productCard.setPrefSize(220, 220);
 
-            // Create an ImageView for the product image.
-            // The image path is built from the product name
             String imagePath = "file:images/" + p.getName().toLowerCase().replace(" ", "_") + ".png";
             ImageView imageView = new ImageView(new Image(imagePath, true));
             imageView.setFitWidth(100);
             imageView.setPreserveRatio(true);
 
-            // Create labels for name and price.
             Label nameLabel = new Label(p.getName());
             Label priceLabel = new Label(String.format("$%.2f", p.getPrice()));
 
-            // Create an "Add to Cart" button.
             Button addButton = new Button("Add to Cart");
             addButton.setOnAction(e -> {
-                // Add one unit of the product to the cart.
                 cart.addToCart(p, 1);
-
-                // Show an alert confirming the addition.
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Added to Cart");
                 alert.setHeaderText("Changes to Cart!");
@@ -78,11 +78,29 @@ public class StoreController implements Initializable {
                 alert.showAndWait();
             });
 
-            // Add the components to the product card.
             productCard.getChildren().addAll(imageView, nameLabel, priceLabel, addButton);
-
-            // Add the product card to the TilePane
             productContainer.getChildren().add(productCard);
         }
     }
+
+    // Sorts products by name
+    @FXML
+    public void sortByName() {
+        ProductSorter.sortByName(products);
+        showProducts();
+    }
+
+    // Sorts products by price
+    @FXML
+    private void sortByPrice() {
+        ProductSorter.sortByPrice(products);  // Corrected class name here
+        showProducts();
+    }
+    @FXML
+    public void sortByPriceDescending(){
+        ProductSorter.sortByPriceDescending(products);
+        showProducts();
+    }
 }
+
+
