@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -20,6 +21,9 @@ public class StoreController implements Initializable {
 
     @FXML
     private TilePane productContainer;
+    @FXML
+    private TextField searchField;
+    private List<Product> originalProducts;
 
     // A Cart instance to store added products.
     private Cart cart;
@@ -45,6 +49,7 @@ public class StoreController implements Initializable {
                 new Product("Product 11", 20.0),
                 new Product("Product 12", 30.0)
         );
+        originalProducts = products;
 
         // Show the products initially
         showProducts();
@@ -96,11 +101,35 @@ public class StoreController implements Initializable {
         ProductSorter.sortByPrice(products);  // Corrected class name here
         showProducts();
     }
+
     @FXML
-    public void sortByPriceDescending(){
+    public void sortByPriceDescending() {
         ProductSorter.sortByPriceDescending(products);
         showProducts();
     }
+
+    @FXML
+    private void searchProducts() {
+        String query = searchField.getText();
+
+        // Check if originalProducts is null
+        if (originalProducts == null) {
+            // Log or handle this case appropriately
+            System.out.println("originalProducts is null");
+            return;  // Early exit if originalProducts is null
+        }
+
+        if (query == null || query.isEmpty()) {
+            products = originalProducts; // Reset if no search text
+        } else {
+            // Pass originalProducts to searchByName method
+            products = Search.searchByName(originalProducts, query);
+        }
+
+        showProducts();
+    }
 }
+
+
 
 

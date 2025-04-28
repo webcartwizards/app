@@ -6,10 +6,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.control.TextField?>
 
 <BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ecommerce.StoreController">
     <top>
-        <HBox spacing="10" alignment="TOP_LEFT">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <TextField fx:id="searchField" promptText="Search Products..." onAction="#searchProducts" />
             <Button fx:id="sortByNameButton" text="Sort by Name" onAction="#sortByName"/>
             <Button fx:id="sortByPriceButton" text="Sort Low to High" onAction="#sortByPrice"/>
             <Button fx:id="SortByPriceDescending" text="Sort High to Low" onAction="#sortByPriceDescending"/>
