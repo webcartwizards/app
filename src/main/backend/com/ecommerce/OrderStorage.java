@@ -83,7 +83,8 @@ public class OrderStorage {
                     .append(item.getQuantity())
                     .append(",")
                     .append(item.getPrice())
-                    .append(";");
+                    .append(",")
+                    .append(item.getProduct().getSize());
         }
         if (itemsData.length() > 0) {
             itemsData.setLength(itemsData.length() - 1); // Remove trailing semicolon
@@ -116,21 +117,23 @@ public class OrderStorage {
                 String[] itemEntries = itemsData.split(";");
                 for (String itemEntry : itemEntries) {
                     String[] fields = itemEntry.split(",");
-                    if (fields.length < 3) continue;
+                    if (fields.length < 4) continue;
                     String productName = fields[0];
                     int quantity = Integer.parseInt(fields[1]);
                     double price = Double.parseDouble(fields[2]);
-                    // Create a dummy product; in a complete implementation, perform a lookup.
-                    Product dummyProduct = new Product(productName, price);
+                    String size = fields[3];
+                    Product dummyProduct = new Product(productName, price, size);
                     orderItems.add(new OrderItem(dummyProduct, quantity, price));
                 }
             }
+
             Order order = new Order(accountId, orderId, orderDate, orderItems, totalPrice);
             order.setStatus(status);
             return order;
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-}
+    }

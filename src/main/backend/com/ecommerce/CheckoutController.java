@@ -85,32 +85,35 @@ public class CheckoutController implements Initializable {
         // convert cart items
         List<OrderItem> orderItems = new ArrayList<>();
         double subtotal = 0;
+        StringBuilder orderSummary = new StringBuilder();
+
         for (CartItem ci : cartItems) {
             double price = ci.getProd().getPrice();
+            String size = ci.getProd().getSize();
+            //Add sizes
+            orderSummary.append(ci.getProd().getName())
+                    .append("[Size: ").append(size).append("] ")
+                    .append("x").append(ci.getQuantity())
+                    .append(" - $").append(price * ci.getQuantity()).append("\n");
             subtotal += ci.getQuantity() * price;
             orderItems.add(new OrderItem(ci.getProd(), ci.getQuantity(), price));
         }
 
         String orderId   = UUID.randomUUID().toString();
-        LocalDateTime now= LocalDateTime.now();
-        Order order      = new Order(
-                Session.currentCustomer.getAccountId(),
-                orderId,
-                now,
-                orderItems,
-                subtotal + subtotal * TAX_RATE
-        );
+        LocalDateTime now = LocalDateTime.now();
+        Order order = new Order(Session.currentCustomer.getAccountId(), orderId, now, orderItems, subtotal + subtotal * TAX_RATE);
+
         Session.currentCustomer.addOrder(order);
         OrderStorage.saveOrder(order);
+        //Clear cart after order
+        cart.getCartItems().clear();
 
-        cart.getCartItems().clear();  // empty cart
-
-        new Alert(Alert.AlertType.INFORMATION,
-                String.format("Order %s placed!\nSubtotal: $%.2f\nTax: $%.2f\nTotal: $%.2f",
-                        orderId, subtotal, subtotal*TAX_RATE, subtotal+subtotal*TAX_RATE)
-        ).showAndWait();
-
-        // close window
-        ((Stage)placeOrderButton.getScene().getWindow()).close();
+        //Display order summary
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                String.format("Order %s placed!\n\n%s\nSubtotal: $%.2f\nTax: $%.2f\nTotal: $%.2f",
+                        orderId, orderSummary.toString(), subtotal, subtotal * TAX_RATE, subtotal + subtotal * TAX_RATE)
+        );
+        alert.showAndWait();
+        ((Stage) placeOrderButton.getScene().getWindow()).close();
     }
 }
