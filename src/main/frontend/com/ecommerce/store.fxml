@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="rootPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ecommerce.StoreController">
     <top>
-        <HBox prefHeight="60" spacing="10" alignment="CENTER">
+        <HBox prefHeight="50" spacing="10" alignment="CENTER">
             <TextField fx:id="searchField" prefWidth="450" promptText="Search Products..." onAction="#searchProducts" />
             <Button fx:id="sortByNameButton" text="Sort by Name" onAction="#sortByName"/>
             <Button fx:id="sortByPriceButton" text="Sort Low to High" onAction="#sortByPrice"/>
