@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -18,91 +17,100 @@ import java.util.UUID;
 
 public class CheckoutController implements Initializable {
 
-    @FXML
-    private VBox rootContainer;  // Root container defined in checkout.fxml
+    @FXML private Label orderSummaryLabel;
+    @FXML private TextField shippingAddressField;
+    @FXML private TextField emailField;
+    @FXML private TextField phoneField;
+    @FXML private TextField paymentField;
 
-    @FXML
-    private Label orderSummaryLabel;
+    @FXML private Label subtotalLabel;
+    @FXML private Label taxLabel;
+    @FXML private Label totalLabel;
 
-    @FXML
-    private TextField shippingAddressField;
+    @FXML private Button placeOrderButton;
 
-    @FXML
-    private TextField paymentInfoField;
-
-    @FXML
-    private Button placeOrderButton;
+    // sales tax rate
+    private static final double TAX_RATE = 0.0975;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Check if a customer is logged in.
         if (Session.currentCustomer == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Login Required");
-            alert.setHeaderText(null);
-            alert.setContentText("You must be logged in to proceed to checkout.");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "You must be logged in to checkout.");
             alert.showAndWait();
             placeOrderButton.setDisable(true);
-        } else {
-            orderSummaryLabel.setText("Checkout for " + Session.currentCustomer.getName());
+            return;
         }
+
+        orderSummaryLabel.setText("Checkout for: " + Session.currentCustomer.getName());
+
+        // calculate and display subtotal/tax/total
+        updateTotals();
 
         placeOrderButton.setOnAction(e -> placeOrder());
     }
 
-    private void placeOrder() {
-        String shippingAddress = shippingAddressField.getText().trim();
-        String paymentInfo = paymentInfoField.getText().trim();
+    private void updateTotals() {
+        Cart cart = Cart.getInstance();
+        double subtotal = 0;
+        for (CartItem item : cart.getCartItems()) {
+            subtotal += item.getQuantity() * item.getProd().getPrice();
+        }
+        double tax   = subtotal * TAX_RATE;
+        double total = subtotal + tax;
 
-        if (shippingAddress.isEmpty() || paymentInfo.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Missing Information");
-            alert.setHeaderText(null);
-            alert.setContentText("Please provide a shipping address and payment information.");
+        subtotalLabel.setText(String.format("$%.2f", subtotal));
+        taxLabel     .setText(String.format("$%.2f", tax));
+        totalLabel   .setText(String.format("$%.2f", total));
+    }
+
+    private void placeOrder() {
+        String ship   = shippingAddressField.getText().trim();
+        String mail   = emailField.getText().trim();
+        String phone  = phoneField.getText().trim();
+        String payment= paymentField.getText().trim();
+
+        if (ship.isEmpty() || mail.isEmpty() || phone.isEmpty() || payment.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill out all fields.");
             alert.showAndWait();
             return;
         }
 
-        // Get the current cart items.
         Cart cart = Cart.getInstance();
         List<CartItem> cartItems = new ArrayList<>(cart.getCartItems());
         if (cartItems.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Cart Empty");
-            alert.setHeaderText(null);
-            alert.setContentText("Your cart is empty!");
-            alert.showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Your cart is empty!").showAndWait();
             return;
         }
 
-        // Convert cart items to order items and calculate total price.
+        // convert cart items
         List<OrderItem> orderItems = new ArrayList<>();
-        double totalPrice = 0;
-        for (CartItem item : cartItems) {
-            totalPrice += item.getQuantity() * item.getProd().getPrice();
-            orderItems.add(new OrderItem(item.getProd(), item.getQuantity(), item.getProd().getPrice()));
+        double subtotal = 0;
+        for (CartItem ci : cartItems) {
+            double price = ci.getProd().getPrice();
+            subtotal += ci.getQuantity() * price;
+            orderItems.add(new OrderItem(ci.getProd(), ci.getQuantity(), price));
         }
 
-        // Generate unique order ID and get current date/time.
-        String orderId = UUID.randomUUID().toString();
-        LocalDateTime orderDate = LocalDateTime.now();
+        String orderId   = UUID.randomUUID().toString();
+        LocalDateTime now= LocalDateTime.now();
+        Order order      = new Order(
+                Session.currentCustomer.getAccountId(),
+                orderId,
+                now,
+                orderItems,
+                subtotal + subtotal * TAX_RATE
+        );
+        Session.currentCustomer.addOrder(order);
+        OrderStorage.saveOrder(order);
 
-        // Create a new Order with the proper parameters.
-        Order newOrder = new Order(Session.currentCustomer.getAccountId(), orderId, orderDate, orderItems, totalPrice);
-        Session.currentCustomer.addOrder(newOrder);
-        OrderStorage.saveOrder(newOrder);
+        cart.getCartItems().clear();  // empty cart
 
-        // Clear the cart after placing the order.
-        cart.getCartItems().clear();
-        // alert that the order has been placed
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Order Placed");
-        alert.setHeaderText(null);
-        alert.setContentText("Your order (" + orderId + ") has been placed successfully!");
-        alert.showAndWait();
+        new Alert(Alert.AlertType.INFORMATION,
+                String.format("Order %s placed!\nSubtotal: $%.2f\nTax: $%.2f\nTotal: $%.2f",
+                        orderId, subtotal, subtotal*TAX_RATE, subtotal+subtotal*TAX_RATE)
+        ).showAndWait();
 
-        // Close the checkout window (modal).
-        Stage checkoutStage = (Stage) placeOrderButton.getScene().getWindow();
-        checkoutStage.close();
+        // close window
+        ((Stage)placeOrderButton.getScene().getWindow()).close();
     }
 }
