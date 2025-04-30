@@ -10,7 +10,6 @@ public class Search {
         if (products == null) {
             return result;
         }
-
         String lowerQuery = query.toLowerCase();
 
         for (Product p : products) {

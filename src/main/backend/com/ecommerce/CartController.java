@@ -78,6 +78,7 @@ public class CartController implements Initializable {
 
         // Create labels for product name, quantity and price.
         javafx.scene.control.Label nameLabel = new javafx.scene.control.Label(item.getProd().getName());
+        javafx.scene.control.Label sizeLabel = new javafx.scene.control.Label("Size: " + item.getProd().getSize());
         javafx.scene.control.Label quantityLabel = new javafx.scene.control.Label("Qty: " + item.getQuantity());
         javafx.scene.control.Label priceLabel = new javafx.scene.control.Label(String.format("$%.2f", item.getProd().getPrice()));
 
@@ -108,7 +109,7 @@ public class CartController implements Initializable {
         buttonContainer.setAlignment(Pos.CENTER);
 
         // Assemble the card.
-        card.getChildren().addAll(imageView, nameLabel, quantityLabel, priceLabel, buttonContainer);
+        card.getChildren().addAll(imageView, nameLabel,sizeLabel, quantityLabel, priceLabel, buttonContainer);
 
         return card;
     }

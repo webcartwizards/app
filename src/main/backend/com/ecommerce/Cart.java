@@ -21,7 +21,7 @@ public class Cart {
     public void addToCart(Product prod, int quant) {
         for (CartItem item : cartList) {
             // Assuming products are identified by their name.
-            if (item.getProd().getName().equals(prod.getName())) {
+            if (item.getProd().equals(prod)){
                 // Increase the quantity of the existing item.
                 item.changeQuantity(item.getQuantity() + quant);
                 return; // Done—no need to add a new CartItem.

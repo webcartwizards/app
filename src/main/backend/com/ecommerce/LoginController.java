@@ -50,8 +50,9 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
 
-        if (!isInputValid(username, password)) return;
-
+        if (!isInputValid(username, password)) {
+            return;
+        }
         try {
             if (username.equals("admin")) {
                 registerAdmin();
