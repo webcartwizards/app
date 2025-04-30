@@ -45,6 +45,12 @@ public class CartController implements Initializable {
         Cart cart = Cart.getInstance();
         List<CartItem> items = cart.getCartItems();
 
+        // show message if cart is empty
+        if (items.isEmpty()) {
+            javafx.scene.control.Label empty = new javafx.scene.control.Label("You currently don't have any items in your cart!");
+            cartContainer.getChildren().add(empty);
+            return;
+        }
         for (CartItem item : items) {
             VBox itemCard = createCartItemCard(item);
             cartContainer.getChildren().add(itemCard);
