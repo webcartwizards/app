@@ -36,18 +36,18 @@ public class StoreController implements Initializable {
         // Initialize the cart and product list
         cart = Cart.getInstance();
         products = Arrays.asList(
-                new Product("Adidas Pants", 10.0),
-                new Product("Black T Shirt", 20.0),
-                new Product("Oakley Sunglasses", 60.0),
-                new Product("Old Skool Hi Top Vans", 70.0),
-                new Product("Product 5", 20.0),
-                new Product("Product 6", 30.0),
-                new Product("Product 7", 10.0),
-                new Product("Product 8", 20.0),
-                new Product("Product 9", 30.0),
-                new Product("Product 10", 10.0),
-                new Product("Product 11", 20.0),
-                new Product("Product 12", 30.0)
+                new Product("Adidas Pants", 10.0, "clothing"),
+                new Product("Black T Shirt", 20.0, "clothing"),
+                new Product("Oakley Sunglasses", 60.0, "accessory"),
+                new Product("Old Skool Hi Top Vans", 70.0, "shoes"),
+                new Product("Product 5", 20.0, "clothing"),
+                new Product("Product 6", 30.0, "accessory"),
+                new Product("Product 7", 10.0, "clothing"),
+                new Product("Product 8", 20.0, "clothing"),
+                new Product("Product 9", 30.0, "clothing"),
+                new Product("Product 10", 10.0, "clothing"),
+                new Product("Product 11", 20.0, "clothing"),
+                new Product("Product 12", 30.0, "clothing")
         );
         originalProducts = products;
 
@@ -55,7 +55,6 @@ public class StoreController implements Initializable {
         showProducts();
     }
 
-    // Method to display the products in the TilePane
     private void showProducts() {
         productContainer.getChildren().clear();  // Clear existing items
 
@@ -75,18 +74,56 @@ public class StoreController implements Initializable {
 
             Button addButton = new Button("Add to Cart");
             addButton.setOnAction(e -> {
-                cart.addToCart(p, 1);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Added to Cart");
-                alert.setHeaderText("Changes to Cart!");
-                alert.setContentText(p.getName() + " has been added to your cart.");
-                alert.showAndWait();
-            });
+                if (p.getCategory().equals("shoes")) {
+                    List<String> sizes = Arrays.asList("7", "8", "9", "10", "11", "12"); // Shoe sizes
+                    javafx.scene.control.ChoiceDialog<String> sizeDialog = new javafx.scene.control.ChoiceDialog<>("M", sizes);
+                    sizeDialog.setTitle("Select Size");
+                    sizeDialog.setHeaderText("Choose a size for " + p.getName());
+                    sizeDialog.setContentText("Size:");
 
+                    sizeDialog.showAndWait().ifPresent(selectedSize -> {
+                        Product selectedProduct = new Product(p.getName(), p.getPrice(), p.getCategory(), selectedSize);
+                        cart.addToCart(selectedProduct, 1);
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Added to Cart");
+                        alert.setHeaderText("Changes to Cart!");
+                        alert.setContentText(p.getName() + " (Size " + selectedSize + ") has been added to your cart.");
+                        alert.showAndWait();
+                    });
+                }
+                else if (p.getCategory().equals("clothing")) {
+                    List<String> sizes = Arrays.asList("S", "M", "L", "XL"); // Clothing sizes
+                    javafx.scene.control.ChoiceDialog<String> sizeDialog = new javafx.scene.control.ChoiceDialog<>("M", sizes);
+                    sizeDialog.setTitle("Select Size");
+                    sizeDialog.setHeaderText("Choose a size for " + p.getName());
+                    sizeDialog.setContentText("Size:");
+
+                    sizeDialog.showAndWait().ifPresent(selectedSize -> {
+                        Product selectedProduct = new Product(p.getName(), p.getPrice(), p.getCategory(), selectedSize);
+                        cart.addToCart(selectedProduct, 1);
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Added to Cart");
+                        alert.setHeaderText("Changes to Cart!");
+                        alert.setContentText(p.getName() + " (Size " + selectedSize + ") has been added to your cart.");
+                        alert.showAndWait();
+                    });
+                }
+                else {
+                    cart.addToCart(p, 1);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Added to Cart");
+                    alert.setHeaderText("Changes to Cart!");
+                    alert.setContentText(p.getName() + " has been added to your cart.");
+                    alert.showAndWait();
+                }
+            });
             productCard.getChildren().addAll(imageView, nameLabel, priceLabel, addButton);
             productContainer.getChildren().add(productCard);
         }
     }
+
 
     // Sorts products by name
     @FXML
