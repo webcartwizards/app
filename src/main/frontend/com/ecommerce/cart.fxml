@@ -19,7 +19,7 @@
         </ScrollPane>
     </center>
     <bottom>
-        <HBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="50" spacing="10" BorderPane.alignment="CENTER">
             <Button fx:id="checkoutButton" text="Proceed to Checkout" />
         </HBox>
     </bottom>
