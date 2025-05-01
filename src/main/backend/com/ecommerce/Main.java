@@ -14,6 +14,7 @@ public class Main extends Application {
         BorderPane root = loader.load();
 
         Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         Image icon = new Image("file:images/"+"Wizard_Hat.png");
         stage.setTitle("E-Commerce Store");
         stage.getIcons().add(icon);

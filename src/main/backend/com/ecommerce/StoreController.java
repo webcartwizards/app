@@ -149,7 +149,6 @@ public class StoreController implements Initializable {
     @FXML
     private void searchProducts() {
         String query = searchField.getText();
-
         // Check if originalProducts is null
         if (originalProducts == null) {
             // Log or handle this case appropriately
@@ -163,7 +162,6 @@ public class StoreController implements Initializable {
             // Pass originalProducts to searchByName method
             products = Search.searchByName(originalProducts, query);
         }
-
         showProducts();
     }
 }

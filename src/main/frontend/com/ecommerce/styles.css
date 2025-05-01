@@ -1,0 +1,76 @@
+/* Root pane styling */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Product grid layout */
+.tile-pane {
+    -fx-hgap: 15;
+    -fx-vgap: 15;
+    -fx-alignment: center;
+}
+
+/* Product card container */
+.vbox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.05), 4, 0, 0, 2);
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #111;
+    -fx-font-weight: normal;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 8 16;
+}
+
+.button:hover {
+    -fx-background-color: #333333;
+}
+
+#checkoutButton, .control-button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+#checkoutButton:hover, .control-button:hover {
+    -fx-background-color: #222222;
+}
+
+.cart-item-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+}
+.text-field {
+    -fx-border-color: #003366;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+    -fx-background-color: white;
+}
+#searchField {
+    -fx-border-color: #003366;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+    -fx-background-color: white;
+}
+
