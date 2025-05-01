@@ -36,18 +36,19 @@ public class StoreController implements Initializable {
         // Initialize the cart and product list
         cart = Cart.getInstance();
         products = Arrays.asList(
-                new Product("Adidas Pants", 10.0, "clothing"),
-                new Product("Black T Shirt", 20.0, "clothing"),
-                new Product("Oakley Sunglasses", 60.0, "accessory"),
-                new Product("Old Skool Hi Top Vans", 70.0, "shoes"),
-                new Product("Product 5", 20.0, "clothing"),
-                new Product("Product 6", 30.0, "accessory"),
-                new Product("Product 7", 10.0, "clothing"),
-                new Product("Product 8", 20.0, "clothing"),
-                new Product("Product 9", 30.0, "clothing"),
-                new Product("Product 10", 10.0, "clothing"),
-                new Product("Product 11", 20.0, "clothing"),
-                new Product("Product 12", 30.0, "clothing")
+                new Product("Black T Shirt", 25.0, "clothing"),
+                new Product("Dress Shirt", 40.0, "clothing"),
+                new Product("Purple Hoodie", 30.0, "clothing"),
+                new Product("Adidas Pants", 70.0, "clothing"),
+                new Product("Jeans", 20.0, "clothing"),
+                new Product("Green Shorts", 15.0, "clothing"),
+                new Product("Old Skool Hi Top Vans", 75.0, "shoes"),
+                new Product("Converse", 80.0, "shoes"),
+                new Product("Air Jordans", 180.0, "shoes"),
+                new Product("Oakley Sunglasses", 200.0, "accessory"),
+                new Product("Black Cap", 10.0, "accessory"),
+                new Product("Rolex", 10000.0, "accessory")
+
         );
         originalProducts = products;
 
