@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -121,6 +122,9 @@ public class CartController implements Initializable {
     private void openCheckoutModal() {
         if (Session.currentCustomer == null) {
             showAlert("Login Required", "You must be logged in to proceed to checkout.");
+            return;
+        } else if (Cart.getInstance().getCartItems().isEmpty()) {
+            showAlert("Cannot proceed to checkout", "There are no items currently in cart.");
             return;
         }
         try {
