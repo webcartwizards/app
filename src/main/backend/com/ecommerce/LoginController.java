@@ -17,8 +17,8 @@ public class LoginController {
     @FXML private PasswordField passwordField;
 
     // Static map to store accounts (username -> Customer).
-    static Map<String, Customer> accounts = new HashMap<>();
-    private static final String ACCOUNTS_FILE = "accounts.txt";
+    public static Map<String, Customer> accounts = new HashMap<>();
+    public static final String ACCOUNTS_FILE = "accounts.txt";
 
     @FXML
     public void initialize() {
@@ -51,27 +51,44 @@ public class LoginController {
         String password = passwordField.getText().trim();
 
         if (!isInputValid(username, password)) {
+            showAlert(Alert.AlertType.ERROR, "Input Error", "Please enter both username and password.");
             return;
         }
-        try {
-            if (username.equals("admin")) {
-                registerAdmin();
-            } else {
-                registerUser(username, password);
+
+        // Check if the username is "admin" and handle registration logic
+        if (username.equals("admin")) {
+            // Admin-specific registration logic
+            if (!password.equals("password")) {
+                showAlert(Alert.AlertType.ERROR, "Registration Failed", "Admin account must have password 'password'.");
+                return;
             }
+            if (accounts.containsKey("admin")) {
+                showAlert(Alert.AlertType.ERROR, "Registration Failed", "Admin account already exists.");
+                return;
+            }
+            Customer admin = new Customer("admin", "password", UUID.randomUUID().toString(), true);
+            accounts.put("admin", admin);
+            saveAccounts();
+            showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Admin account created successfully.");
+        } else {
+            // Normal user registration logic
+            if (accounts.containsKey(username)) {
+                showAlert(Alert.AlertType.ERROR, "Registration Failed", "Username already exists.");
+                return;
+            }
+            Customer newCustomer = new Customer(username, password, UUID.randomUUID().toString());
+            accounts.put(username, newCustomer);
+            saveAccounts();
             showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Account created successfully.");
-        } catch (IllegalArgumentException ex) {
-            showAlert(Alert.AlertType.ERROR, "Registration Failed", ex.getMessage());
         }
     }
 
     // Validates that both the username and password are non-empty.
-    private boolean isInputValid(String username, String password) {
-        if (username.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Input Error", "Please enter both username and password.");
+    public boolean isInputValid(String username, String password) {
+        if(username.isEmpty() || password.isEmpty()) {
             return false;
-        }
-        return true;
+        }else
+            return true;
     }
 
     // Register the special admin account.
