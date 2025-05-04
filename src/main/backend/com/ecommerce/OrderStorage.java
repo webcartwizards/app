@@ -84,7 +84,8 @@ public class OrderStorage {
                     .append(",")
                     .append(item.getPrice())
                     .append(",")
-                    .append(item.getProduct().getSize());
+                    .append(item.getProduct().getSize())
+                    .append(";");
         }
         if (itemsData.length() > 0) {
             itemsData.setLength(itemsData.length() - 1); // Remove trailing semicolon
