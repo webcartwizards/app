@@ -12,9 +12,9 @@
     <top>
         <HBox prefHeight="50" spacing="10" alignment="CENTER">
             <TextField fx:id="searchField" prefWidth="450" promptText="Search Products..." onAction="#searchProducts" />
-            <Button fx:id="sortByNameButton" text="Sort by Name" onAction="#sortByName"/>
-            <Button fx:id="sortByPriceButton" text="Sort Low to High" onAction="#sortByPrice"/>
-            <Button fx:id="SortByPriceDescending" text="Sort High to Low" onAction="#sortByPriceDescending"/>
+            <Button fx:id="sortByNameButton" text="Sort Name" onAction="#sortByName"/>
+            <Button fx:id="sortByPriceButton" text="Low to High" onAction="#sortByPrice"/>
+            <Button fx:id="SortByPriceDescending" text="High to Low" onAction="#sortByPriceDescending"/>
         </HBox>
     </top>
     <center>
